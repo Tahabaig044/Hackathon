@@ -91,45 +91,17 @@ const generateResumeHTML = () => __awaiter(void 0, void 0, void 0, function* () 
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Resume</title>
-            <style>
-                .resume-container {
-    width: 90%;
-    max-width: 800px;
-    text-align: center;
-    margin: 0 auto;
-    padding: 20px;
-    box-sizing: border-box;
-    border: 2px solid #054875eb;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #deecf1;
-    border-radius: 5px;
-}
-.resume-header img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 10px;
-}
-.resume-section {
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #57959f;
-}
-.resume-section h2 {
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-            </style>
         </head>
         <body>
             <div class="resume-container">
                 <div class="resume-header">
                     ${photoBase64 ? `<img src="${photoBase64}" alt="Photo"/>` : '<p>No photo available</p>'}
+                    <div class="personalinfo">
                     <h1>${name}</h1>
                     <p>Email: ${email}</p>
                     <p>Phone: ${phone}</p>
                     <p>Address: ${address}</p>
+                </div>
                 </div>
                 <div class="resume-section">
                     <h2>Education</h2>
@@ -176,13 +148,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }));
     downloadButton.addEventListener('click', () => {
-        const resumeBlob = new Blob([resumeContent.innerHTML], { type: 'text/html' });
-        const url = URL.createObjectURL(resumeBlob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'resume.html';
-        a.click();
-        URL.revokeObjectURL(url);
+        const opt = {
+            margin: 0.2,
+            filename: 'resume.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+        };
+        // Generate PDF from the resume content
+        html2pdf().from(resumeContent).set(opt).save();
     });
     editButton.addEventListener('click', () => {
         resumeOutput.classList.add('hidden');
