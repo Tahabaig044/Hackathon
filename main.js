@@ -104,24 +104,24 @@ const generateResumeHTML = () => __awaiter(void 0, void 0, void 0, function* () 
                 </div>
                 </div>
                 <div class="resume-section">
-                    <h2>Education</h2>
+                    <h1>Education</h1>
                     <p><strong>Institution: ${institution}</strong></p>
                     <p>Degree: ${degree}</p>
                     <p>Graduation Date: ${graduationDate}</p>
                 </div>
                 <div class="resume-section">
-                    <h2>Skills</h2>
+                    <h1>Skills</h1>
                     <p>${skills}</p>
                 </div>
                 <div class="resume-section">
-                    <h2>Work Experience</h2>
+                    <h1>Work Experience</h1>
                     <p><strong>${company}</strong> - ${position}</p>
                     <p>Start Date: ${startDate}</p>
                     <p>End Date: ${endDate || 'Present'}</p>
                     <p>Responsibilities: ${responsibilities}</p>
                 </div>
                 <div class="resume-section">
-                    <h2>About</h2>
+                    <h1>About</h1>
                     <p>${about}</p>
                 </div>
             </div>
